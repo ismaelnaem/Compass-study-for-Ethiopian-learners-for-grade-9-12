@@ -1,0 +1,612 @@
+import fs from 'fs';
+
+const data = [
+    // ---------------- COMMON SUBJECTS ----------------
+    {
+      id: "g11-eng",
+      name: "English",
+      units: [
+        {
+          id: "g11-eng-u1",
+          name: "The African Union",
+          subUnits: [
+            { id: "g11-eng-u1-s1", name: "Reading and Vocabulary: AU History" },
+            { id: "g11-eng-u1-s2", name: "Grammar: Tense Revisions" },
+            { id: "g11-eng-u1-s3", name: "Writing: Expository Essays" },
+          ],
+        },
+        {
+          id: "g11-eng-u2",
+          name: "Education",
+          subUnits: [
+            { id: "g11-eng-u2-s1", name: "Reading: Education for Development" },
+            { id: "g11-eng-u2-s2", name: "Grammar: Conditional Sentences" },
+            { id: "g11-eng-u2-s3", name: "Speaking: Debating Educational Policies" },
+          ],
+        },
+        {
+          id: "g11-eng-u3",
+          name: "Traditional and Modern Medicine",
+          subUnits: [
+            { id: "g11-eng-u3-s1", name: "Reading: Healthcare Systems" },
+            { id: "g11-eng-u3-s2", name: "Grammar: Relative Clauses" },
+            { id: "g11-eng-u3-s3", name: "Writing: Argumentative Texts" },
+          ],
+        },
+        {
+          id: "g11-eng-u4",
+          name: "Tourism and Wildlife",
+          subUnits: [
+            { id: "g11-eng-u4-s1", name: "Reading: Eco-tourism in Ethiopia" },
+            { id: "g11-eng-u4-s2", name: "Grammar: Passive Voice" },
+            { id: "g11-eng-u4-s3", name: "Writing: Descriptive Writing" },
+          ],
+        },
+        {
+          id: "g11-eng-u5",
+          name: "Climate Change and Environment",
+          subUnits: [
+            { id: "g11-eng-u5-s1", name: "Reading: Global Warming Impacts" },
+            { id: "g11-eng-u5-s2", name: "Grammar: Reported Speech" },
+            { id: "g11-eng-u5-s3", name: "Speaking: Environmental Campaigns" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-ict",
+      name: "Information Technology",
+      units: [
+        {
+          id: "g11-ict-u1",
+          name: "Information Systems",
+          subUnits: [
+            { id: "g11-ict-u1-s1", name: "Concepts of Information Systems" },
+            { id: "g11-ict-u1-s2", name: "Types of Information Systems" },
+            { id: "g11-ict-u1-s3", name: "IT in Business and Society" },
+          ],
+        },
+        {
+          id: "g11-ict-u2",
+          name: "Enhancing the Use of Software",
+          subUnits: [
+            { id: "g11-ict-u2-s1", name: "Advanced Word Processing Features" },
+            { id: "g11-ict-u2-s2", name: "Advanced Spreadsheet Analysis" },
+            { id: "g11-ict-u2-s3", name: "Presentation Software Techniques" },
+          ],
+        },
+        {
+          id: "g11-ict-u3",
+          name: "Computer Network and Internet",
+          subUnits: [
+            { id: "g11-ict-u3-s1", name: "Network Topologies and Protocols" },
+            { id: "g11-ict-u3-s2", name: "Internet Services and Security" },
+            { id: "g11-ict-u3-s3", name: "E-commerce and E-learning" },
+          ],
+        },
+        {
+          id: "g11-ict-u4",
+          name: "Web Design",
+          subUnits: [
+            { id: "g11-ict-u4-s1", name: "HTML Basics and Tags" },
+            { id: "g11-ict-u4-s2", name: "Cascading Style Sheets (CSS)" },
+            { id: "g11-ict-u4-s3", name: "Publishing a Website" },
+          ],
+        },
+        {
+          id: "g11-ict-u5",
+          name: "Fundamentals of Programming",
+          subUnits: [
+            { id: "g11-ict-u5-s1", name: "Introduction to C++" },
+            { id: "g11-ict-u5-s2", name: "Control Structures in C++" },
+            { id: "g11-ict-u5-s3", name: "Functions and Arrays" },
+          ],
+        },
+      ],
+    },
+
+    // ---------------- NATURAL SCIENCE STREAM ----------------
+    {
+      id: "g11-math-nat",
+      name: "Mathematics",
+      stream: "Natural",
+      units: [
+        {
+          id: "g11-math-nat-u1",
+          name: "Relations and Functions",
+          subUnits: [
+            { id: "g11-math-nat-u1-s1", name: "Review of Relations and Functions" },
+            { id: "g11-math-nat-u1-s2", name: "Combinations and Composition of Functions" },
+            { id: "g11-math-nat-u1-s3", name: "Inverse Functions" },
+          ],
+        },
+        {
+          id: "g11-math-nat-u2",
+          name: "Rational Expressions and Functions",
+          subUnits: [
+            { id: "g11-math-nat-u2-s1", name: "Simplification of Rational Expressions" },
+            { id: "g11-math-nat-u2-s2", name: "Graphs of Rational Functions" },
+            { id: "g11-math-nat-u2-s3", name: "Solving Rational Equations and Inequalities" },
+          ],
+        },
+        {
+          id: "g11-math-nat-u3",
+          name: "Coordinate Geometry",
+          subUnits: [
+            { id: "g11-math-nat-u3-s1", name: "Straight Lines" },
+            { id: "g11-math-nat-u3-s2", name: "Conic Sections: Circles and Parabolas" },
+            { id: "g11-math-nat-u3-s3", name: "Conic Sections: Ellipses and Hyperbolas" },
+          ],
+        },
+        {
+          id: "g11-math-nat-u4",
+          name: "Mathematical Reasoning",
+          subUnits: [
+            { id: "g11-math-nat-u4-s1", name: "Logic and Propositions" },
+            { id: "g11-math-nat-u4-s2", name: "Logical Connectives and Truth Tables" },
+            { id: "g11-math-nat-u4-s3", name: "Arguments and Validity" },
+          ],
+        },
+        {
+          id: "g11-math-nat-u5",
+          name: "Statistics and Probability",
+          subUnits: [
+            { id: "g11-math-nat-u5-s1", name: "Measures of Central Tendency and Dispersion" },
+            { id: "g11-math-nat-u5-s2", name: "Permutations and Combinations" },
+            { id: "g11-math-nat-u5-s3", name: "Introduction to Probability" },
+          ],
+        },
+        {
+          id: "g11-math-nat-u6",
+          name: "Matrices and Determinants",
+          subUnits: [
+            { id: "g11-math-nat-u6-s1", name: "Operations on Matrices" },
+            { id: "g11-math-nat-u6-s2", name: "Determinants of Square Matrices" },
+            { id: "g11-math-nat-u6-s3", name: "Inverse of a Matrix and Systems of Equations" },
+          ],
+        },
+        {
+          id: "g11-math-nat-u7",
+          name: "Complex Numbers",
+          subUnits: [
+            { id: "g11-math-nat-u7-s1", name: "The Concept of Complex Numbers" },
+            { id: "g11-math-nat-u7-s2", name: "Operations on Complex Numbers" },
+            { id: "g11-math-nat-u7-s3", name: "Polar Form and Roots of Complex Numbers" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-phy-nat",
+      name: "Physics",
+      stream: "Natural",
+      units: [
+        {
+          id: "g11-phy-u1",
+          name: "Measurement and Practical Work",
+          subUnits: [
+            { id: "g11-phy-u1-s1", name: "Errors in Measurement" },
+            { id: "g11-phy-u1-s2", name: "Significant Figures and Dimensional Analysis" },
+          ],
+        },
+        {
+          id: "g11-phy-u2",
+          name: "Vector Quantities",
+          subUnits: [
+            { id: "g11-phy-u2-s1", name: "Vector Addition and Subtraction" },
+            { id: "g11-phy-u2-s2", name: "Resolution and Dot/Cross Products" },
+          ],
+        },
+        {
+          id: "g11-phy-u3",
+          name: "Kinematics",
+          subUnits: [
+            { id: "g11-phy-u3-s1", name: "Motion in 1D and 2D" },
+            { id: "g11-phy-u3-s2", name: "Projectile and Circular Motion" },
+            { id: "g11-phy-u3-s3", name: "Relative Velocity" },
+          ],
+        },
+        {
+          id: "g11-phy-u4",
+          name: "Dynamics",
+          subUnits: [
+            { id: "g11-phy-u4-s1", name: "Newton's Laws of Motion" },
+            { id: "g11-phy-u4-s2", name: "Friction and Centripetal Force" },
+            { id: "g11-phy-u4-s3", name: "Conservation of Linear Momentum" },
+          ],
+        },
+        {
+          id: "g11-phy-u5",
+          name: "Work, Energy and Power",
+          subUnits: [
+            { id: "g11-phy-u5-s1", name: "Work Done by Constant and Variable Forces" },
+            { id: "g11-phy-u5-s2", name: "Kinetic and Potential Energy" },
+            { id: "g11-phy-u5-s3", name: "Conservation of Energy and Power" },
+          ],
+        },
+        {
+          id: "g11-phy-u6",
+          name: "Rotational Motion",
+          subUnits: [
+            { id: "g11-phy-u6-s1", name: "Kinematics of Rotational Motion" },
+            { id: "g11-phy-u6-s2", name: "Torque and Angular Momentum" },
+            { id: "g11-phy-u6-s3", name: "Moment of Inertia" },
+          ],
+        },
+        {
+          id: "g11-phy-u7",
+          name: "Equilibrium",
+          subUnits: [
+            { id: "g11-phy-u7-s1", name: "Conditions of Equilibrium" },
+            { id: "g11-phy-u7-s2", name: "Center of Mass and Gravity" },
+          ],
+        },
+        {
+          id: "g11-phy-u8",
+          name: "Properties of Bulk Matter",
+          subUnits: [
+            { id: "g11-phy-u8-s1", name: "Elasticity and Hooke's Law" },
+            { id: "g11-phy-u8-s2", name: "Fluid Statics and Pressure" },
+            { id: "g11-phy-u8-s3", name: "Fluid Dynamics and Bernoulli's Principle" },
+            { id: "g11-phy-u8-s4", name: "Heat, Temperature and Thermal Expansion" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-che-nat",
+      name: "Chemistry",
+      stream: "Natural",
+      units: [
+        {
+          id: "g11-che-u1",
+          name: "Fundamental Concepts of Chemistry",
+          subUnits: [
+            { id: "g11-che-u1-s1", name: "The Scope of Chemistry" },
+            { id: "g11-che-u1-s2", name: "Measurements and Scientific Notation" },
+          ],
+        },
+        {
+          id: "g11-che-u2",
+          name: "Atomic Structure and Periodic Table",
+          subUnits: [
+            { id: "g11-che-u2-s1", name: "Historical Development of Atomic Theory" },
+            { id: "g11-che-u2-s2", name: "Quantum Mechanical Model of the Atom" },
+            { id: "g11-che-u2-s3", name: "Electronic Configuration and Periodicity" },
+          ],
+        },
+        {
+          id: "g11-che-u3",
+          name: "Chemical Bonding and Structure",
+          subUnits: [
+            { id: "g11-che-u3-s1", name: "Ionic and Covalent Bonding" },
+            { id: "g11-che-u3-s2", name: "VSEPR Theory and Molecular Geometry" },
+            { id: "g11-che-u3-s3", name: "Intermolecular Forces" },
+          ],
+        },
+        {
+          id: "g11-che-u4",
+          name: "Physical States of Matter",
+          subUnits: [
+            { id: "g11-che-u4-s1", name: "Kinetic Molecular Theory" },
+            { id: "g11-che-u4-s2", name: "Gas Laws and Ideal Gas Equation" },
+            { id: "g11-che-u4-s3", name: "Properties of Liquids and Solids" },
+          ],
+        },
+        {
+          id: "g11-che-u5",
+          name: "Chemical Kinetics",
+          subUnits: [
+            { id: "g11-che-u5-s1", name: "Rate of Reaction" },
+            { id: "g11-che-u5-s2", name: "Factors Affecting Reaction Rates" },
+            { id: "g11-che-u5-s3", name: "Rate Laws and Collision Theory" },
+          ],
+        },
+        {
+          id: "g11-che-u6",
+          name: "Chemical Equilibrium",
+          subUnits: [
+            { id: "g11-che-u6-s1", name: "Concept of Dynamic Equilibrium" },
+            { id: "g11-che-u6-s2", name: "Equilibrium Constant and Le Chatelier's Principle" },
+            { id: "g11-che-u6-s3", name: "Phase Equilibrium" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-bio-nat",
+      name: "Biology",
+      stream: "Natural",
+      units: [
+        {
+          id: "g11-bio-u1",
+          name: "The Science of Biology",
+          subUnits: [
+            { id: "g11-bio-u1-s1", name: "Nature of Biological Science" },
+            { id: "g11-bio-u1-s2", name: "Tools and Techniques in Biology" },
+          ],
+        },
+        {
+          id: "g11-bio-u2",
+          name: "Biochemical Molecules",
+          subUnits: [
+            { id: "g11-bio-u2-s1", name: "Inorganic and Organic Compounds" },
+            { id: "g11-bio-u2-s2", name: "Carbohydrates, Lipids, Proteins and Nucleic Acids" },
+          ],
+        },
+        {
+          id: "g11-bio-u3",
+          name: "Enzymes",
+          subUnits: [
+            { id: "g11-bio-u3-s1", name: "Nature and Properties of Enzymes" },
+            { id: "g11-bio-u3-s2", name: "Mechanism of Enzyme Action" },
+            { id: "g11-bio-u3-s3", name: "Factors Affecting Enzyme Activity" },
+          ],
+        },
+        {
+          id: "g11-bio-u4",
+          name: "Cell Biology",
+          subUnits: [
+            { id: "g11-bio-u4-s1", name: "Cell Theory and Cell Structure" },
+            { id: "g11-bio-u4-s2", name: "Cellular Organelles and their Functions" },
+            { id: "g11-bio-u4-s3", name: "Transport Across Cell Membranes" },
+          ],
+        },
+        {
+          id: "g11-bio-u5",
+          name: "Energy Transformation",
+          subUnits: [
+            { id: "g11-bio-u5-s1", name: "Cellular Respiration" },
+            { id: "g11-bio-u5-s2", name: "Photosynthesis" },
+          ],
+        },
+        {
+          id: "g11-bio-u6",
+          name: "Human Anatomy and Physiology",
+          subUnits: [
+            { id: "g11-bio-u6-s1", name: "Digestive and Respiratory Systems" },
+            { id: "g11-bio-u6-s2", name: "Circulatory and Excretory Systems" },
+            { id: "g11-bio-u6-s3", name: "Nervous and Endocrine Systems" },
+          ],
+        },
+      ],
+    },
+
+    // ---------------- SOCIAL SCIENCE STREAM ----------------
+    {
+      id: "g11-math-soc",
+      name: "Mathematics",
+      stream: "Social",
+      units: [
+        {
+          id: "g11-math-soc-u1",
+          name: "Sequences and Series",
+          subUnits: [
+            { id: "g11-math-soc-u1-s1", name: "Arithmetic Sequences and Series" },
+            { id: "g11-math-soc-u1-s2", name: "Geometric Sequences and Series" },
+            { id: "g11-math-soc-u1-s3", name: "Applications of Sequences and Series" },
+          ],
+        },
+        {
+          id: "g11-math-soc-u2",
+          name: "Introduction to Calculus",
+          subUnits: [
+            { id: "g11-math-soc-u2-s1", name: "Limits of Sequences and Functions" },
+            { id: "g11-math-soc-u2-s2", name: "Continuity" },
+            { id: "g11-math-soc-u2-s3", name: "Rates of Change" },
+          ],
+        },
+        {
+          id: "g11-math-soc-u3",
+          name: "Statistics and Probability",
+          subUnits: [
+            { id: "g11-math-soc-u3-s1", name: "Data Collection and Presentation" },
+            { id: "g11-math-soc-u3-s2", name: "Measures of Central Tendency and Dispersion" },
+            { id: "g11-math-soc-u3-s3", name: "Basic Concepts of Probability" },
+          ],
+        },
+        {
+          id: "g11-math-soc-u4",
+          name: "Matrices and Determinants",
+          subUnits: [
+            { id: "g11-math-soc-u4-s1", name: "Matrix Operations" },
+            { id: "g11-math-soc-u4-s2", name: "Determinants and Inverses" },
+            { id: "g11-math-soc-u4-s3", name: "Solving Systems of Linear Equations" },
+          ],
+        },
+        {
+          id: "g11-math-soc-u5",
+          name: "Linear Programming",
+          subUnits: [
+            { id: "g11-math-soc-u5-s1", name: "Linear Inequalities" },
+            { id: "g11-math-soc-u5-s2", name: "Graphical Solutions of Linear Programming" },
+            { id: "g11-math-soc-u5-s3", name: "Applications in Optimization" },
+          ],
+        },
+        {
+          id: "g11-math-soc-u6",
+          name: "Mathematics in Business",
+          subUnits: [
+            { id: "g11-math-soc-u6-s1", name: "Simple and Compound Interest" },
+            { id: "g11-math-soc-u6-s2", name: "Annuities and Amortization" },
+            { id: "g11-math-soc-u6-s3", name: "Depreciation" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-geo-soc",
+      name: "Geography",
+      stream: "Social",
+      units: [
+        {
+          id: "g11-geo-u1",
+          name: "Map Reading and Interpretation",
+          subUnits: [
+            { id: "g11-geo-u1-s1", name: "Topographic Maps and Relief Features" },
+            { id: "g11-geo-u1-s2", name: "Drainage Patterns and Catchment Areas" },
+            { id: "g11-geo-u1-s3", name: "Human Settlements on Maps" },
+          ],
+        },
+        {
+          id: "g11-geo-u2",
+          name: "Physical Environment of the World and Africa",
+          subUnits: [
+            { id: "g11-geo-u2-s1", name: "The Earth's Structure and Tectonic Plates" },
+            { id: "g11-geo-u2-s2", name: "Global Climate Systems" },
+            { id: "g11-geo-u2-s3", name: "Major Biomes of the World" },
+          ],
+        },
+        {
+          id: "g11-geo-u3",
+          name: "Human Population and Demographic Characteristics",
+          subUnits: [
+            { id: "g11-geo-u3-s1", name: "Population Dynamics and Growth Rates" },
+            { id: "g11-geo-u3-s2", name: "Migration and Its Impacts" },
+            { id: "g11-geo-u3-s3", name: "Population Policies" },
+          ],
+        },
+        {
+          id: "g11-geo-u4",
+          name: "Economic Activities and Natural Resources",
+          subUnits: [
+            { id: "g11-geo-u4-s1", name: "Agriculture and Food Security" },
+            { id: "g11-geo-u4-s2", name: "Industrialization and Manufacturing" },
+            { id: "g11-geo-u4-s3", name: "Sustainable Resource Management" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-his-soc",
+      name: "History",
+      stream: "Social",
+      units: [
+        {
+          id: "g11-his-u1",
+          name: "The Discipline of History and Human Evolution",
+          subUnits: [
+            { id: "g11-his-u1-s1", name: "Historiography and Sources" },
+            { id: "g11-his-u1-s2", name: "Theories of Human Evolution" },
+            { id: "g11-his-u1-s3", name: "Stone Age Cultures" },
+          ],
+        },
+        {
+          id: "g11-his-u2",
+          name: "Ancient World Civilizations",
+          subUnits: [
+            { id: "g11-his-u2-s1", name: "Mesopotamia and Egypt" },
+            { id: "g11-his-u2-s2", name: "Ancient Greece and Rome" },
+            { id: "g11-his-u2-s3", name: "Ancient India and China" },
+          ],
+        },
+        {
+          id: "g11-his-u3",
+          name: "Peoples and States in Ethiopia and the Horn to the end of 13th C",
+          subUnits: [
+            { id: "g11-his-u3-s1", name: "Languages and Settlement Patterns" },
+            { id: "g11-his-u3-s2", name: "Aksumite Empire" },
+            { id: "g11-his-u3-s3", name: "Zagwe Dynasty" },
+          ],
+        },
+        {
+          id: "g11-his-u4",
+          name: "The Middle Ages and Early Modern World",
+          subUnits: [
+            { id: "g11-his-u4-s1", name: "Feudalism in Europe" },
+            { id: "g11-his-u4-s2", name: "The Byzantine and Islamic Empires" },
+            { id: "g11-his-u4-s3", name: "The Renaissance and Reformation" },
+          ],
+        },
+        {
+          id: "g11-his-u5",
+          name: "Peoples and States of Africa to 1500",
+          subUnits: [
+            { id: "g11-his-u5-s1", name: "Ancient African States" },
+            { id: "g11-his-u5-s2", name: "Trans-Saharan Trade" },
+            { id: "g11-his-u5-s3", name: "Spread of Islam in Africa" },
+          ],
+        },
+        {
+          id: "g11-his-u6",
+          name: "Africa and the Outside World 1500-1880s",
+          subUnits: [
+            { id: "g11-his-u6-s1", name: "European Contacts and the Slave Trade" },
+            { id: "g11-his-u6-s2", name: "Legitimate Trade" },
+            { id: "g11-his-u6-s3", name: "Pre-colonial African States" },
+          ],
+        },
+        {
+          id: "g11-his-u7",
+          name: "State Formation in Ethiopia 13th-19th C",
+          subUnits: [
+            { id: "g11-his-u7-s1", name: "The Solomonic Dynasty" },
+            { id: "g11-his-u7-s2", name: "Muslim Sultanates and Oromo Population Movement" },
+            { id: "g11-his-u7-s3", name: "Zemene Mesafint (Era of Princes)" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "g11-eco-soc",
+      name: "Economics",
+      stream: "Social",
+      units: [
+        {
+          id: "g11-eco-u1",
+          name: "Introduction to Macroeconomics",
+          subUnits: [
+            { id: "g11-eco-u1-s1", name: "Microeconomics vs. Macroeconomics" },
+            { id: "g11-eco-u1-s2", name: "Macroeconomic Goals and Instruments" },
+          ],
+        },
+        {
+          id: "g11-eco-u2",
+          name: "National Income Accounting",
+          subUnits: [
+            { id: "g11-eco-u2-s1", name: "GDP and GNP Concepts" },
+            { id: "g11-eco-u2-s2", name: "Approaches to Measuring National Income" },
+            { id: "g11-eco-u2-s3", name: "Real vs. Nominal GDP" },
+          ],
+        },
+        {
+          id: "g11-eco-u3",
+          name: "Macroeconomic Problems",
+          subUnits: [
+            { id: "g11-eco-u3-s1", name: "Unemployment: Types and Causes" },
+            { id: "g11-eco-u3-s2", name: "Inflation: Causes and Consequences" },
+            { id: "g11-eco-u3-s3", name: "Business Cycles" },
+          ],
+        },
+        {
+          id: "g11-eco-u4",
+          name: "Macroeconomic Policy Instruments",
+          subUnits: [
+            { id: "g11-eco-u4-s1", name: "Fiscal Policy" },
+            { id: "g11-eco-u4-s2", name: "Monetary Policy" },
+            { id: "g11-eco-u4-s3", name: "Income Policy" },
+          ],
+        },
+        {
+          id: "g11-eco-u5",
+          name: "Money and Banking",
+          subUnits: [
+            { id: "g11-eco-u5-s1", name: "Evolution and Functions of Money" },
+            { id: "g11-eco-u5-s2", name: "Commercial Banks and Credit Creation" },
+            { id: "g11-eco-u5-s3", name: "Central Bank Functions" },
+          ],
+        },
+        {
+          id: "g11-eco-u6",
+          name: "Economic Development",
+          subUnits: [
+            { id: "g11-eco-u6-s1", name: "Economic Growth vs. Economic Development" },
+            { id: "g11-eco-u6-s2", name: "Indicators of Development" },
+            { id: "g11-eco-u6-s3", name: "Challenges of Developing Countries" },
+          ],
+        },
+      ],
+    },
+];
+
+fs.writeFileSync("g11.json", JSON.stringify(data));
