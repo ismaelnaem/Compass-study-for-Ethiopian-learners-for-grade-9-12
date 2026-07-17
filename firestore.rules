@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Regular user profile/progress data — the student can read/write their own doc,
+    // EXCEPT they can never touch premium/entitlement fields from here (see entitlements below).
+    match /users/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // PREMIUM STATUS lives here instead, in its own locked collection.
+    // The student can READ their own entitlement (so the UI can show "Premium" badge),
+    // but can NEVER write it. Only the server (Firebase Admin SDK, which ignores these
+    // rules entirely) can grant or revoke premium — e.g. from a verified payment webhook.
+    match /entitlements/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      allow write: if false;
+    }
+
+    // NOTE: the old questionBank collection has been retired — quiz
+    // question caching now lives in Supabase (see supabase/setup.sql),
+    // to protect Firestore's quota. Firestore keeps only serious account
+    // data: auth, profiles, entitlements.
+
+    // Block access to anything else by default
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
