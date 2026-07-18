@@ -18,14 +18,27 @@ service cloud.firestore {
       allow write: if false;
     }
 
-    // NOTE: the old questionBank collection has been retired — quiz
+  // NOTE: the old questionBank collection has been retired — quiz
     // question caching now lives in Supabase (see supabase/setup.sql),
     // to protect Firestore's quota. Firestore keeps only serious account
     // data: auth, profiles, entitlements.
 
-    // Block access to anything else by default
-    match /{document=**} {
+    // CLASS / CONNECTION / CONSENT SYSTEM — all three collections below are
+    // server-only (Admin SDK bypasses these rules entirely). This is
+    // deliberate: who can see or create a class/connection depends on
+    // ROLE and RELATIONSHIP, not just "is this your own document" — logic
+    // that's easy to get subtly wrong in security-rule syntax. Centralizing
+    // it in the API endpoints (create-class, request-connection,
+    // respond-connection, list-connections) means there's exactly one
+    // place this logic lives and gets reviewed, not two.
+    match /classes/{classId} {
       allow read, write: if false;
     }
-  }
-}
+    match /connections/{connectionId} {
+      allow read, write: if false;
+    }
+    match /compassIds/{compassId} {
+      allow read, write: if false;
+    }
+
+    // Block access to anything else by default
