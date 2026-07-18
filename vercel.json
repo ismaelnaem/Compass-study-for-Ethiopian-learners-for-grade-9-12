@@ -1,0 +1,41 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/api/generate-lesson", "destination": "/api/ai?_fn=generate-lesson" },
+    { "source": "/api/generate-quiz", "destination": "/api/ai?_fn=generate-quiz" },
+    { "source": "/api/translate-lesson", "destination": "/api/ai?_fn=translate-lesson" },
+    { "source": "/api/tts", "destination": "/api/ai?_fn=tts" },
+    { "source": "/api/chat-coach", "destination": "/api/ai?_fn=chat-coach" },
+    { "source": "/api/check-understanding", "destination": "/api/ai?_fn=check-understanding" },
+
+    { "source": "/api/create-class", "destination": "/api/connections?_fn=create-class" },
+    { "source": "/api/get-my-id", "destination": "/api/connections?_fn=get-my-id" },
+    { "source": "/api/list-connections", "destination": "/api/connections?_fn=list-connections" },
+    { "source": "/api/request-connection", "destination": "/api/connections?_fn=request-connection" },
+    { "source": "/api/respond-connection", "destination": "/api/connections?_fn=respond-connection" },
+
+    { "source": "/api/list-messages", "destination": "/api/messaging?_fn=list-messages" },
+    { "source": "/api/send-message", "destination": "/api/messaging?_fn=send-message" },
+    { "source": "/api/report-chat", "destination": "/api/messaging?_fn=report-chat" },
+
+    { "source": "/api/set-role", "destination": "/api/account?_fn=set-role" },
+    { "source": "/api/verify-dev-password", "destination": "/api/account?_fn=verify-dev-password" },
+    { "source": "/api/admin/grant-dev-role", "destination": "/api/account?_fn=grant-dev-role" },
+
+    { "source": "/api/flag-answer", "destination": "/api/feedback?_fn=flag-answer" },
+    { "source": "/api/log-feedback", "destination": "/api/feedback?_fn=log-feedback" },
+
+    { "source": "/api/create-payment", "destination": "/api/billing?_fn=create-payment" },
+    { "source": "/api/premium-webhook", "destination": "/api/billing?_fn=premium-webhook" },
+
+    { "source": "/api/health", "destination": "/api/system?_fn=health" },
+    { "source": "/api/cache-stats", "destination": "/api/system?_fn=cache-stats" }
+  ]
+}
