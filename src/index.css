@@ -1,0 +1,195 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-brand-purple: #8b5cf6;
+  --color-brand-cyan: #06b6d4;
+  --color-dark-bg: #090e1a;
+  --color-dark-card: #12182b;
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+/*
+  ===== Compass Study Theme System =====
+  5 selectable themes, applied via a `data-theme` attribute on <html>.
+  Components should prefer these semantic variables over new hardcoded
+  hex values going forward. See src/theme.ts for the theme registry,
+  ThemeProvider, and the useTheme() hook that sets this attribute.
+
+  NOTE: the shared shell (page background, bottom nav, .glass-card) is
+  wired to these variables. Older screens still have some hardcoded
+  hex colors from before the theme system existed — those are being
+  migrated screen-by-screen rather than all at once, so nothing breaks
+  silently. See CHANGELOG-STAGE2.md for the current migration status.
+*/
+
+/* Theme: "original" — the Stage 1 dark violet/indigo look (default) */
+:root,
+[data-theme="original"] {
+  --color-bg-base: #04060d;
+  --color-bg-elevated: #090e1a;
+  --color-bg-card: rgba(14, 20, 31, 0.85);
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
+  --color-text-primary: #f2f4f8;
+  --color-text-muted: #818cb4;
+  --color-accent-primary: #8b5cf6;
+  --color-accent-secondary: #06b6d4;
+  --color-accent-gradient-from: #8b5cf6;
+  --color-accent-gradient-to: #06b6d4;
+}
+
+/* Theme: "dark" — a cooler, less purple dark theme */
+[data-theme="dark"] {
+  --color-bg-base: #0a0d12;
+  --color-bg-elevated: #10141c;
+  --color-bg-card: rgba(20, 24, 32, 0.85);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-text-primary: #eef0f4;
+  --color-text-muted: #8a93a3;
+  --color-accent-primary: #3b82f6;
+  --color-accent-secondary: #22d3ee;
+  --color-accent-gradient-from: #3b82f6;
+  --color-accent-gradient-to: #22d3ee;
+}
+
+/* Theme: "gray" — neutral slate, lighter than the dark themes */
+[data-theme="gray"] {
+  --color-bg-base: #1c1f26;
+  --color-bg-elevated: #262a33;
+  --color-bg-card: rgba(45, 49, 59, 0.85);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #f0f1f3;
+  --color-text-muted: #a3a9b7;
+  --color-accent-primary: #64748b;
+  --color-accent-secondary: #94a3b8;
+  --color-accent-gradient-from: #64748b;
+  --color-accent-gradient-to: #94a3b8;
+}
+
+/* Theme: "compass" — matches the new logo (blue-to-orange, silver accents) */
+[data-theme="compass"] {
+  --color-bg-base: #070f1c;
+  --color-bg-elevated: #0d1830;
+  --color-bg-card: rgba(13, 24, 48, 0.85);
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-text-primary: #f3f6fb;
+  --color-text-muted: #9aabc7;
+  --color-accent-primary: #3596e0;
+  --color-accent-secondary: #f2a765;
+  --color-accent-gradient-from: #3596e0;
+  --color-accent-gradient-to: #f2a765;
+}
+
+/* Theme: "black" — pure AMOLED black, high contrast */
+[data-theme="black"] {
+  --color-bg-base: #000000;
+  --color-bg-elevated: #060606;
+  --color-bg-card: rgba(18, 18, 18, 0.9);
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-text-primary: #ffffff;
+  --color-text-muted: #9a9a9a;
+  --color-accent-primary: #ffffff;
+  --color-accent-secondary: #3596e0;
+  --color-accent-gradient-from: #ffffff;
+  --color-accent-gradient-to: #3596e0;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent bounce scrolling that causes graphical artifacts */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Core utility styles */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Elegant Soft Cards */
+.glass-card {
+  background: var(--color-bg-card) !important;
+  border: 1px solid var(--color-border-subtle) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+.glass-card:active {
+  transform: scale(0.98);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fadeIn {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slideDown {
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes waterFill {
+  0% { height: 10%; }
+  50% { height: 60%; }
+  100% { height: 95%; }
+}
+.animate-waterFill {
+  animation: waterFill 3s ease-in-out infinite alternate;
+}
+
+@keyframes wave {
+  0% { transform: translateX(-10%); }
+  50% { transform: translateX(10%); }
+  100% { transform: translateX(-10%); }
+}
+.animate-wave {
+  animation: wave 2s linear infinite;
+}
+
+/*
+  Skeleton loading shimmer — theme-aware, not hardcoded light gray.
+  The base shape uses the current theme's card color; the shimmer sweep
+  is a soft, semi-transparent highlight so it reads correctly whether the
+  active theme is Original, Dark, Gray, Compass, or Black.
+*/
+@keyframes skeletonShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.skeleton-shimmer {
+  background-color: var(--color-bg-card);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 20%,
+    rgba(255, 255, 255, 0.14) 40%,
+    rgba(255, 255, 255, 0.06) 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.6s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+    background-image: none;
+  }
+}
+
